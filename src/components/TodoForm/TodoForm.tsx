@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Grid, TextField} from "@mui/material";
+import {Button, FormControl, Grid, TextField} from "@mui/material";
 import {useAppDispatch} from "../../hooks/redux";
 import {addTodo} from "../../store/reducers/TodoSlice";
 
@@ -20,7 +20,7 @@ const TodoForm = () => {
         }))
         setTask("")
     }
-    const onEnterPress = (e: any) => {
+    const onEnterPress = (e: React.KeyboardEvent<FormControl>) => {
         if (e.key === "Enter") addTask()
     }
 

@@ -1,13 +1,14 @@
 import React from 'react';
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {FormControl, InputLabel, MenuItem} from "@mui/material";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {changeFilter, FilterType} from "../../store/reducers/TodoSlice";
 
 const Filter = () => {
     const dispatch = useAppDispatch()
     const {filter} = useAppSelector(state => state.todoReducer)
-    const onFilterChange = (event: SelectChangeEvent) => {
-        dispatch(changeFilter(event.target.value as FilterType))
+    const onFilterChange = (event: SelectChangeEvent<FilterType>) => {
+        dispatch(changeFilter(event.target.value))
     }
     return (
         <FormControl fullWidth>

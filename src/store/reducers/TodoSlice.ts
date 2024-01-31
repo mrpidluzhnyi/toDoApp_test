@@ -63,4 +63,23 @@ export const changeFilter = (filterValue: FilterType) => (dispatch: AppDispatch)
     dispatch(todoSlice.actions.setFilter(filterValue))
 }
 
+export const reorderTodos = (tasks: ITodo[]) => (dispatch: AppDispatch) => {
+    StorageService.setTasks(STORAGE_KEYS.TASKS, tasks)
+    dispatch(todoSlice.actions.setTasks(tasks))
+}
+
+export const updateTask = (id: number, updateValue: string) => (dispatch: AppDispatch) => {
+    const newList = StorageService.getTasks(STORAGE_KEYS.TASKS).map((task: ITodo) => {
+        if (task.id === id) {
+            return {
+                ...task,
+                title: updateValue
+            }
+        }
+        return task
+    })
+    StorageService.setTasks(STORAGE_KEYS.TASKS, newList)
+    dispatch(todoSlice.actions.setTasks(newList))
+}
+
 export default todoSlice.reducer

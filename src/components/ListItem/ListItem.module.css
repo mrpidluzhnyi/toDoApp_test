@@ -7,6 +7,7 @@
     border-radius: 10px;
     margin-bottom: 15px;
     background-color: rgba(129, 198, 220, 0.64);
+    cursor: grab;
 }
 .list_item_completed {
     display: flex;
@@ -18,6 +19,10 @@
     margin-bottom: 15px;
     text-decoration: line-through;
     background-color: rgba(129, 220, 134, 0.64);
+    cursor: grab;
+}
+.list_body {
+    flex-grow: 1;
 }
 .buttons {
     display: flex;

@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
 
 import style from "./TodoList.module.css";
-import {useAppSelector} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import ListItem from "../ListItem/ListItem";
 import {Typography} from "@mui/material";
 import {ITodo} from "../../models/ITodo";
+import { Reorder } from "framer-motion"
+import {reorderTodos} from "../../store/reducers/TodoSlice";
 
 const TodoList = () => {
+    const dispatch = useAppDispatch()
     const {tasks, filter} = useAppSelector(state => state.todoReducer)
     const [filteredTasks, setFilteredTasks] = useState<ITodo[]>([])
-    console.log(tasks)
+    const onDrop = (tasks: ITodo[]) => {
+        dispatch(reorderTodos(tasks))
+    }
     useEffect(() => {
         switch (filter) {
             case "all": {
@@ -37,14 +42,19 @@ const TodoList = () => {
         }
     }, [filter, tasks])
     return (
-        <div className={style.list}>
-            {!tasks.length &&
-                <Typography variant="h3" gutterBottom>
-                  You have no tasks
-                </Typography>
-            }
-            {filteredTasks.map(el => <ListItem key={el.id} task={el}/>)}
-        </div>
+        <>
+            <span>*-double click to edit task (press "Enter" to accept changes)</span>
+            <div className={style.list}>
+                {!filteredTasks.length &&
+                  <Typography variant="h3" gutterBottom>
+                    You have no tasks
+                  </Typography>
+                }
+                <Reorder.Group as={"div"} axis="y" values={filteredTasks} onReorder={onDrop}>
+                    {filteredTasks.map(el => <ListItem key={el.id} task={el}/>)}
+                </Reorder.Group>
+            </div>
+        </>
     );
 };
 
