@@ -1,0 +1,28 @@
+.list_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background-color: rgba(129, 198, 220, 0.64);
+}
+.list_item_completed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-decoration: line-through;
+    background-color: rgba(129, 220, 134, 0.64);
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+.buttons svg:last-child {
+    margin-left: 10px;
+}
